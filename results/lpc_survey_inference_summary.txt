@@ -1,0 +1,6 @@
+Usability GEE covariance: bias_reduced
+Usability omnibus device Wald chi2=11.6506, p=0.00295187
+Usability Friedman chi2=6.40385, p=0.0406839
+Stress Friedman chi2=14.2597, p=0.000800823
+The adapted LPC usability index uses SUS-style polarity/scoring but is not claimed to be a formally validated SUS instrument.
+The questionnaire does not directly measure acceptability of the eye-tracking technology itself.

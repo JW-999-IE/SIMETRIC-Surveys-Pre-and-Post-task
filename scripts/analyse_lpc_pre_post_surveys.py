@@ -73,8 +73,8 @@ def excel_col_index(ref):
 
 
 def strict_sheet(path: Path, wanted: str) -> pd.DataFrame:
-    ns = "htt<SET_YOUR_ANALYSIS_ROOT>"
-    relns = "htt<SET_YOUR_ANALYSIS_ROOT>"
+    ns = "http://purl.oclc.org/ooxml/spreadsheetml/main"
+    relns = "http://purl.oclc.org/ooxml/officeDocument/relationships"
     with zipfile.ZipFile(path) as z:
         shared = []
         if "xl/sharedStrings.xml" in z.namelist():

@@ -3,5 +3,3 @@ pandas
 scipy
 statsmodels
 openpyxl
-matplotlib
-seaborn

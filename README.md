@@ -1,98 +1,89 @@
-# SIMETRIC — Pre- and Post-Task Surveys
+# SIMETRIC — Pre- and post-task surveys
 
-Analysis code and aggregate outputs for the pre- and post-simulation survey measures of the
-SIMETRIC study (Simulation and Imaging Methods for Eye Tracking and Recording Intravenous
+Analysis code and de-identified outputs for the survey measures of the SIMETRIC study
+(Simulation and Imaging Methods using Eye Tracking for the Recording of Peripheral Intravenous
 Catheter Insertion).
 
 Companion repositories:
-[eye tracking](https://github.com/JW-999-IE/SIMETRIC-Eye-tracking) ·
-[hand motion](https://github.com/JW-999-IE/SIMETRIC-Hand-motion)
+[eye tracking, procedural success and duration](https://github.com/JW-999-IE/SIMETRIC-Eye-tracking) ·
+[hand motion and grip](https://github.com/JW-999-IE/SIMETRIC-Hand-motion)
+
+Manuscript: *Ultrasound-guided long peripheral catheter configurations differ in procedural
+performance, gaze-event rates and hand kinematics in the SIMETRIC simulation study*
+(submitted to *Scientific Reports*).
 
 ## Study context
 
-Twenty-seven hospital clinicians each performed five ultrasound-guided long peripheral catheter
-(LPC) insertions with each of three configurations — catheter-over-needle (CON), accelerated
-technique with guidewire (ATG), and modified Seldinger technique (MST) — on a vascular-access
-phantom. Surveys were administered before and after the simulation session.
+Twenty-seven clinicians completed five ultrasound-guided insertions with each of three 8-cm long
+peripheral catheter configurations on a vascular-access phantom: catheter-over-needle (CON),
+accelerated technique with guidewire (ATG) and direct Seldinger technique (DST). Surveys were
+completed before and after the simulation session.
 
-**Terminology.** The parent protocol refers to these devices as midline catheters, reflecting the
-nomenclature current when it was written. At 8 cm insertable length they fall within the long
-peripheral catheter category under current definitions. LPC is used throughout.
+The analysis script reads the original survey workbook, in which DST is labelled `MST`. The
+deposited outputs in `results/` use DST throughout.
 
 ## Measures
 
-**Pre-simulation.** Demographics, professional background, prior LPC and ultrasound training,
-self-reported LPC insertion volume, knowledge items, clinical attitudes (0–10 Likert), and
-current practice.
-
-**Post-simulation.** Three device-specific outcomes:
-
 | Outcome | Scale | Analysis |
 |---|---|---|
-| Self-reported stress during the procedure | 1–5 Likert, per attempt | Aggregated to one score per participant per configuration; Friedman test with Holm-adjusted Wilcoxon signed-rank pairwise comparisons |
-| Adapted LPC usability index | 0–100, derived from multiple items on ease of use, control and confidence | Participant-clustered GEE with configuration as predictor |
-| Device preference | Categorical (favourite, most comfortable, least stressful) | Descriptive |
+| Device-specific stress | 1–5, one score per clinician and configuration | Friedman test; Holm-adjusted Wilcoxon signed-rank pairwise tests |
+| Adapted LPC usability index | Ten items scored 0–4 following System Usability Scale polarity, rescaled to 0–100; not a validated SUS | Clinician-clustered GEE; item-level Friedman tests with Holm correction |
+| Device preference | Favourite, most comfortable, least stressful; general preference for a guidewire device | Descriptive |
 
-## Headline results
+## Results
 
-**Usability.** Mean index 50.3 (ATG), 69.7 (CON), 69.8 (MST). Omnibus Wald χ²(2) = 11.65,
-P = 0.003. ATG rated 19.4 points below CON (95% CI 7.1–31.8, Holm P = 0.006) and 19.5 points
-below MST (6.6–32.4, P = 0.006); CON and MST did not differ (0.1 points, P = 0.988).
+**Usability.** Means 69.7 (CON), 50.3 (ATG), 69.8 (DST). CON was 19.4 points higher than ATG
+(95% CI 7.1–31.8, Holm P = 0.006); DST was 19.5 points higher than ATG (6.6–32.4, Holm P = 0.006);
+CON and DST did not differ (0.1 points, P = 0.988).
 
-**Stress.** Mean 2.85 (SD 1.20) ATG, 2.00 (0.78) CON, 1.96 (1.06) MST; medians 3, 2, 2.
-Friedman χ²(2) = 14.26, P < 0.001. Holm-adjusted Wilcoxon: ATG higher than CON (P = 0.006) and
-than MST (P = 0.006); CON and MST did not differ (P = 0.978).
+**Stress.** Means 2.00 (CON), 2.85 (ATG), 1.96 (DST). Friedman P < 0.001; ATG higher than CON and
+than DST (Holm P = 0.006 each); CON and DST did not differ (P = 0.978).
 
-**Preference.** Favourite: MST 10/27 (37.0%), CON 8 (29.6%), ATG 5 (18.5%), no preference 4
-(14.8%). Most comfortable: MST 14 (51.9%). Least stressful: MST 12 (44.4%).
+**Preference.** Favourite device: DST 10/27, CON 8/27, ATG 5/27, no preference 4/27. Twenty of 27
+clinicians (74.1%) stated a general preference for a catheter with a guidewire.
 
-Note that the stress summary statistics are **means and medians across participants of
-participant-level aggregate scores**, not medians of raw Likert responses. Values such as 2.85
-and 1.96 are not attainable as medians of an integer 1–5 scale.
+Stress values are means of clinician-level scores, not medians of individual Likert responses.
 
 ## Repository structure
 
 ```
 ├── README.md
+├── DEIDENTIFICATION.md
+├── data/README.md                         # why raw responses are not deposited
 ├── scripts/
-│   └── analyse_lpc_pre_post_surveys.py   # survey analysis pipeline
-├── results/
-│   ├── lpc_usability_descriptives.csv
-│   ├── lpc_usability_pairwise_gee.csv
-│   ├── lpc_adapted_usability_scores.csv
-│   ├── lpc_adapted_usability_items.csv
-│   ├── lpc_stress_descriptives.csv
-│   ├── lpc_stress_pairwise_wilcoxon.csv
-│   ├── lpc_device_stress_scores.csv
-│   ├── lpc_post_preferences.csv
-│   ├── lpc_guidewire_preference.csv
-│   └── lpc_survey_inference_summary.txt
-└── figures/
-    └── figure5_surveys_composite.png
+│   └── analyse_lpc_pre_post_surveys.py
+└── results/
+    ├── lpc_adapted_usability_scores.csv      # clinician × configuration index (0–100)
+    ├── lpc_adapted_usability_items.csv       # item-level responses and 0–4 scores
+    ├── lpc_usability_descriptives.csv
+    ├── lpc_usability_pairwise_gee.csv
+    ├── lpc_device_stress_scores.csv
+    ├── lpc_stress_descriptives.csv
+    ├── lpc_stress_pairwise_wilcoxon.csv
+    ├── lpc_post_preferences.csv
+    ├── lpc_guidewire_preference.csv
+    ├── lpc_post_global_simulation_outcomes.csv
+    └── lpc_survey_inference_summary.txt
 ```
+
+To rerun: `python scripts/analyse_lpc_pre_post_surveys.py --survey-workbook <workbook.xlsx> --output-dir results`
 
 ## Data availability
 
-**Raw participant-level survey responses are not deposited here.** They combine age band, gender,
-job title, clinical setting and years of experience for 27 clinicians recruited through named
-Irish hospital networks, and that combination could permit re-identification. Aggregate outputs
-sufficient to reproduce every reported statistic are included in `results/`.
-
-Raw responses may be requested from the corresponding author, subject to ethical approval and
-institutional data-sharing agreements.
+Raw survey responses and free-text answers are not deposited, because the combination of age band,
+gender, profession, clinical setting and years of experience could allow re-identification of
+participants. Clinician-level scores in `results/` use pseudonymous codes (P1–P30) and are
+sufficient to reproduce every reported survey statistic. Raw responses may be requested from the
+corresponding author, subject to institutional and ethical approval.
 
 ## Ethics
 
 Approved by the Clinical Research Ethics Committee at the University of Galway (C.A. 3392) before
-data collection began. Written informed consent was obtained from all participants.
+recruitment. Written informed consent was obtained from all participants.
 
 ## Requirements
 
-```
-Python >= 3.9
-numpy, pandas, scipy, statsmodels, openpyxl
-matplotlib, seaborn   # figures
-```
+Python ≥ 3.9 with numpy, pandas, scipy, statsmodels and openpyxl.
 
 ## Citation
 

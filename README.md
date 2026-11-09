@@ -1,15 +1,14 @@
 # SIMETRIC — Pre- and post-task surveys
 
 Analysis code and de-identified outputs for the survey measures of the SIMETRIC study
-(Simulation and Imaging Methods using Eye Tracking for the Recording of Peripheral Intravenous
-Catheter Insertion).
+(Simulation and Imaging Methods for Eye Tracking and Recording Intravenous Catheter insertion).
 
 Companion repositories:
 [eye tracking, procedural success and duration](https://github.com/JW-999-IE/SIMETRIC-Eye-tracking) ·
 [hand motion and grip](https://github.com/JW-999-IE/SIMETRIC-Hand-motion)
 
-Manuscript: *Ultrasound-guided long peripheral catheter configurations differ in procedural
-performance, gaze-event rates and hand kinematics in the SIMETRIC simulation study*
+Manuscript: *Comparing three ultrasound-guided long peripheral catheter insertion techniques
+using eye tracking and hand-motion analysis: the SIMETRIC simulation study*
 (submitted to *Scientific Reports*).
 
 ## Study context
